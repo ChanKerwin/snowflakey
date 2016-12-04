@@ -13,4 +13,4 @@ if size.zero?
   size = 96
 end
 
-puts Snowflake.generate(prefix: prefix, size: size)
+puts Snowflake.generate(prefix, size: size)
