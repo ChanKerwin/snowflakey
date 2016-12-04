@@ -1,3 +1,4 @@
+require "time"
 require "securerandom"
 require "snowflake/version"
 
@@ -15,10 +16,10 @@ class Snowflake
   attr_reader :prefix, :size, :time, :id, :base
 
   class << self
-    def generate(prefix: nil, size: 96, time: Time.now, base: BASE)
+    def generate(prefix = nil, size: 96, time: Time.now, base: BASE)
       r = (SecureRandom.random_number * 1e16).round
 
-      new(prefix, size, time.utc, r, base)
+      new(prefix, size, time.utc, r, base).to_s
     end
 
     def verify(snowflake, size: 96, base: BASE)
