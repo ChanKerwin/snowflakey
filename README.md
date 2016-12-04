@@ -1,41 +1,67 @@
 # Snowflake
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/snowflake`. To experiment with that code, run `bin/console` for an interactive prompt.
+Unique ID generator.
 
-TODO: Delete this and the text above, and describe your gem
+## Generation
 
-## Installation
-
-Add this line to your application's Gemfile:
+You can generate a simple snowflake by calling `#generate` without
+any arguments.
 
 ```ruby
-gem 'snowflake'
+Snowflake.generate # => "567wz82coauesrlb522"
 ```
 
-And then execute:
+You can also pass a prefix that will be prepended to the snowflake.
 
-    $ bundle
+```ruby
+Snowflake.generate("snow") # => "snow_567wz9ox8b8p58tngzu"
+```
 
-Or install it yourself as:
+Finally it also works with multiple prefixes.
 
-    $ gem install snowflake
+```ruby
+Snowflake.generate(["snow", "flake"]) # => "snow_flake_567wz6ecywb6d6ruor9"
+```
 
-## Usage
+You can also change the size of the snowflake.
 
-TODO: Write usage instructions here
+```ruby
+Snowflake.generate("snow", size: 64) # => "snow_2mdov6imct3o4"
+```
 
-## Development
+You can also use another base.
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+Snowflake.generate("snow", base: 16) # => "snow_ac6591aa22063660af0e05d4"
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+## Verification
 
-## Contributing
+```ruby
+snowflake = Snowflake.verify("snow_567z7pfvdq47fswkt52")
+```
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/snowflake.
+This will return the snowflake as if it had been created with the low level API.
+You can then fetch the size, the time, the ID, the base, etc.
 
+Note that if the snowflake was created with another base than 36 and with another size than 96 you will have to declare those when calling `#verify`.
 
-## License
+## Manual Initialization
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+If you need you can also initialize a snowflake without using the `#generate` method. This gives you more control over every parameters.
 
+```ruby
+prefix = "snow"
+size   = 96
+time   = Time.parse("2016-12-04T22:22:22Z").utc
+id     = 3104654282887302
+base   = 36
+
+snowflake = Snowflake.new(prefix, size, time, id, base)
+```
+
+You can then call `#to_s` to get the snowflake.
+
+```ruby
+snowflake.to_s # => "snow_567z7pfvdq47fswkt52"
+```
