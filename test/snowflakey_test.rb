@@ -35,26 +35,26 @@ class SnowflakeyTest < Minitest::Test
   end
 
   def test_that_we_can_generate_a_snowflake
-    assert_match %r/^[0-9a-z]+$/, Snowflakey.generate
+    assert_match %r/^[0-9a-z]+$/, Snowflakey.generate.to_s
   end
 
   def test_that_we_can_generate_longer_snowflakes
-    assert_equal 19, Snowflakey.generate.size
-    assert_equal 25, Snowflakey.generate(size: 128).size
+    assert_equal 19, Snowflakey.generate.to_s.size
+    assert_equal 25, Snowflakey.generate(size: 128).to_s.size
   end
 
   def test_that_we_can_generate_snowflake_in_another_base
-    assert_match %r/^[0-9]+$/, Snowflakey.generate(base: 10)
-    assert_match %r/^[0-9a-f]+$/, Snowflakey.generate(base: 16)
-    assert_match %r/^[0-9a-z]+$/, Snowflakey.generate(base: 36)
-    assert_match %r/^[0-9a-zA-Z]+$/, Snowflakey.generate(base: 62)
+    assert_match %r/^[0-9]+$/, Snowflakey.generate(base: 10).to_s
+    assert_match %r/^[0-9a-f]+$/, Snowflakey.generate(base: 16).to_s
+    assert_match %r/^[0-9a-z]+$/, Snowflakey.generate(base: 36).to_s
+    assert_match %r/^[0-9a-zA-Z]+$/, Snowflakey.generate(base: 62).to_s
   end
 
   def test_that_we_can_generate_a_snowflake_with_a_prefix
-    assert_match %r/^snow_[0-9a-z]+$/, Snowflakey.generate("snow")
+    assert_match %r/^snow_[0-9a-z]+$/, Snowflakey.generate("snow").to_s
   end
 
   def test_that_we_can_generate_a_snowflake_with_a_multiple_prefixes
-    assert_match %r/^snow_flake_[0-9a-z]+$/, Snowflakey.generate(["snow", "flake"])
+    assert_match %r/^snow_flake_[0-9a-z]+$/, Snowflakey.generate(["snow", "flake"]).to_s
   end
 end

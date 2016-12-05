@@ -10,7 +10,7 @@ module Snowflakey
   def generate(prefix = nil, size: 96, time: Time.now, base: Snowflake::BASE)
     r = (SecureRandom.random_number * 1e16).round
 
-    Snowflake.new(prefix, size, time.utc, r, base).to_s
+    Snowflake.new(prefix, size, time.utc, r, base)
   end
 
   def verify(snowflake, size: 96, base: Snowflake::BASE)
