@@ -1,3 +1,3 @@
-class Snowflakey
+module Snowflakey
   VERSION = "0.1.0"
 end

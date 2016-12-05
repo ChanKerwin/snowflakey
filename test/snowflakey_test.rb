@@ -3,7 +3,7 @@ require 'test_helper'
 class SnowflakeyTest < Minitest::Test
   def setup
     @time      = Time.parse("2016-12-04T22:22:22Z").utc
-    @snowflake = Snowflakey.new("snow", 96, @time, 3104654282887302, 36)
+    @snowflake = Snowflakey::Snowflake.new("snow", 96, @time, 3104654282887302, 36)
   end
 
   def test_that_it_has_a_version_number
@@ -12,7 +12,7 @@ class SnowflakeyTest < Minitest::Test
 
   def test_that_we_can_haz_a_snowflake
     assert @snowflake
-    assert_instance_of Snowflakey, @snowflake
+    assert_instance_of Snowflakey::Snowflake, @snowflake
     assert_equal "snow", @snowflake.prefix
     assert_equal 96, @snowflake.size
     assert_equal @time, @snowflake.time
@@ -25,7 +25,7 @@ class SnowflakeyTest < Minitest::Test
     snowflake = Snowflakey.verify(@snowflake.to_s)
 
     assert snowflake
-    assert_instance_of Snowflakey, snowflake
+    assert_instance_of Snowflakey::Snowflake, snowflake
     assert_equal @snowflake.prefix, snowflake.prefix
     assert_equal @snowflake.size, snowflake.size
     assert_equal @snowflake.time, snowflake.time
