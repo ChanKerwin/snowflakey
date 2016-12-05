@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'snowflake/version'
+require 'snowflakey/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "snowflake"
-  spec.version       = Snowflake::VERSION
+  spec.name          = "snowflakey"
+  spec.version       = Snowflakey::VERSION
   spec.authors       = ["Robin Clart"]
   spec.email         = ["robin@omise.co"]
 
   spec.summary       = %q{Unique ID Generator}
-  spec.homepage      = "https://github.com/robinclart/snowflake"
+  spec.homepage      = "https://github.com/robinclart/snowflakey"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|

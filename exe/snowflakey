@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "snowflake"
+require "snowflakey"
 
 prefix = ARGV[0].to_s.gsub(/[[:space:]]/, "")
 size   = ARGV[1].to_i
@@ -13,4 +13,4 @@ if size.zero?
   size = 96
 end
 
-puts Snowflake.generate(prefix, size: size)
+puts Snowflakey.generate(prefix, size: size)

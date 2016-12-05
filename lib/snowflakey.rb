@@ -1,9 +1,9 @@
 require "time"
 require "securerandom"
 require "baseconv"
-require "snowflake/version"
+require "snowflakey/version"
 
-class Snowflake
+class Snowflakey
   BASE = 36
 
   def initialize(prefix, size, time, id, base)

@@ -1,3 +1,3 @@
-class Snowflake
+class Snowflakey
   VERSION = "0.1.0"
 end

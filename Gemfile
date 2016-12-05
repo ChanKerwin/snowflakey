@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in snowflake.gemspec
+# Specify your gem's dependencies in snowflakey.gemspec
 gemspec
