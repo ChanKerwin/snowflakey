@@ -1,5 +1,6 @@
 require "time"
 require "securerandom"
+require "baseconv"
 require "snowflake/version"
 
 class Snowflake
@@ -10,7 +11,7 @@ class Snowflake
     @size   = size
     @time   = time
     @id     = id
-    @base   = base
+    @base   = base.to_i
   end
 
   attr_reader :prefix, :size, :time, :id, :base
@@ -26,7 +27,8 @@ class Snowflake
       id, prefix = snowflake.reverse.split("_", 2).map { |s| s.reverse }
       ms         = id.to_i(base) >> (size - 41)
       time       = Time.at((ms / 1e3)).utc
-      id         = id.to_i(base) % (2 ** (size - 41))
+      id         = Baseconv.convert(id, from_base: base.to_i, to_base: 10)
+      id         = id.to_i % (2 ** (size - 41))
 
       new(prefix, size, time, id, base)
     end
@@ -36,7 +38,7 @@ class Snowflake
     t  = (@time.to_f * 1e3).round
     id = t << (@size - 41)
     id = id | @id % (2 ** (@size - 41))
-    id = id.to_s(@base)
+    id = Baseconv.convert(id, from_base: 10, to_base: @base)
 
     [*@prefix, id].compact.join("_")
   end
