@@ -5,34 +5,34 @@ Unique ID generator.
 ## Generation
 
 You can generate a simple snowflake by calling `#generate` without
-any arguments.
+any arguments. This will return a snowflake instance. You can then call `#to_s` or let your framework do that for you.
 
 ```ruby
-Snowflakey.generate # => "567wz82coauesrlb522"
+Snowflakey.generate.to_s # => "567wz82coauesrlb522"
 ```
 
 You can also pass a prefix that will be prepended to the snowflake.
 
 ```ruby
-Snowflakey.generate("snow") # => "snow_567wz9ox8b8p58tngzu"
+Snowflakey.generate("snow").to_s # => "snow_567wz9ox8b8p58tngzu"
 ```
 
 Finally it also works with multiple prefixes.
 
 ```ruby
-Snowflakey.generate(["snow", "flake"]) # => "snow_flake_567wz6ecywb6d6ruor9"
+Snowflakey.generate(["snow", "flake"]).to_s # => "snow_flake_567wz6ecywb6d6ruor9"
 ```
 
 You can also change the size of the snowflake.
 
 ```ruby
-Snowflakey.generate("snow", size: 64) # => "snow_2mdov6imct3o4"
+Snowflakey.generate("snow", size: 64).to_s # => "snow_2mdov6imct3o4"
 ```
 
 You can also use another base.
 
 ```ruby
-Snowflakey.generate("snow", base: 16) # => "snow_ac6591aa22063660af0e05d4"
+Snowflakey.generate("snow", base: 16).to_s # => "snow_ac6591aa22063660af0e05d4"
 ```
 
 ## Verification
@@ -41,8 +41,7 @@ Snowflakey.generate("snow", base: 16) # => "snow_ac6591aa22063660af0e05d4"
 snowflake = Snowflakey.verify("snow_567z7pfvdq47fswkt52")
 ```
 
-This will return the snowflake as if it had been created with the low level API.
-You can then fetch the size, the time, the ID, the base, etc.
+This will return the snowflake from which you can fetch the size, the time, the ID, the base, etc.
 
 Note that if the snowflake was created with another base than 36 and with another size than 96 you will have to declare those when calling `#verify`.
 
