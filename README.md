@@ -57,7 +57,7 @@ time   = Time.parse("2016-12-04T22:22:22Z").utc
 id     = 3104654282887302
 base   = 36
 
-snowflake = Snowflakey.new(prefix, size, time, id, base)
+snowflake = Snowflakey::Snowflake.new(prefix, size, time, id, base)
 ```
 
 You can then call `#to_s` to get the snowflake as a string.
