@@ -45,6 +45,9 @@ class SnowflakeTest < Minitest::Test
 
   def test_that_we_can_generate_snowflake_in_another_base
     assert_match %r/^[0-9]+$/, Snowflake.generate(base: 10)
+    assert_match %r/^[0-9a-f]+$/, Snowflake.generate(base: 16)
+    assert_match %r/^[0-9a-z]+$/, Snowflake.generate(base: 36)
+    assert_match %r/^[0-9a-zA-Z]+$/, Snowflake.generate(base: 62)
   end
 
   def test_that_we_can_generate_a_snowflake_with_a_prefix
