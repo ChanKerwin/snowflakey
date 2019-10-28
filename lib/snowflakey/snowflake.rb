@@ -11,6 +11,7 @@ module Snowflakey
     end
 
     attr_reader :prefix, :size, :time, :id, :base
+
     def to_s
       t  = (@time.to_f * 1e3).round
       id = t << (@size - 41)
